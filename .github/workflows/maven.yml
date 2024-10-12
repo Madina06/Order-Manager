@@ -9,12 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 8, 11 ]
+        java: [17]
         include:
-             - java: 8
-               maven-args: "-DrepoToken=$COVERALLS_REPO_TOKEN coveralls:report"
-             - java: 11
-               maven-args: "sonar:sonar -Dsonar.projectKey=madinakuldeeva_Order-Manager"
+          - java: 17
+            maven-args: "sonar:sonar -Dsonar.projectKey=madinakuldeeva_Order-Manager"
     
     name: Build with Java ${{ matrix.java }}
     steps:
