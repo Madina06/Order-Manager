@@ -110,12 +110,12 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
 	public void testCreateOrderButtonShouldDelegateToController() {
 		window.button(JButtonMatcher.withText("Create Order")).click();
 
-		window.dialog().textBox("idField").enterText("3");
-		window.dialog().textBox("customerField").enterText("Customer3");
-		window.dialog().textBox("companyField").enterText("Company3");
-		window.dialog().textBox("productField").enterText("Product3");
-		window.dialog().textBox("statusField").enterText("Status3");
-		window.dialog().textBox("descriptionField").enterText("Description3");
+		window.dialog().textBox("idField").setText("3");
+		window.dialog().textBox("customerField").setText("Customer3");
+		window.dialog().textBox("companyField").setText("Company3");
+		window.dialog().textBox("productField").setText("Product3");
+		window.dialog().textBox("statusField").setText("Status3");
+		window.dialog().textBox("descriptionField").setText("Description3");
 
 		window.dialog().button(JButtonMatcher.withText("OK")).click();
 
