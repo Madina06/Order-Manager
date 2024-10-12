@@ -3,6 +3,7 @@ package com.order_manager.main.view.impl;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -62,7 +63,7 @@ public class OrderManagerViewSwingImpl extends JFrame implements OrderManagerVie
 			} else {
 				List<Order> orders = orderController.getAllOrders();
 				List<Order> filteredOrders = orders.stream()
-						.filter(order -> order.getCompany().equalsIgnoreCase(company)).toList();
+						.filter(order -> order.getCompany().equalsIgnoreCase(company)).collect(Collectors.toList());
 				if (filteredOrders.isEmpty()) {
 					JOptionPane.showMessageDialog(this, "No orders found for company: " + company, "Search Result",
 							JOptionPane.INFORMATION_MESSAGE);
