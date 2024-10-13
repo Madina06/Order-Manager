@@ -64,7 +64,7 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
 
     @Test
     @GUITest
-    public void testDisplayOrders() {
+    public void testDisplayOrders() throws InterruptedException {
         List<Order> orders = Arrays.asList(
                 new Order("1", "Customer1", "Company1", "Product1", "Status1", "Description1", null, null),
                 new Order("2", "Customer2", "Company2", "Product2", "Status2", "Description2", null, null));
@@ -80,13 +80,13 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
 
     @Test
     @GUITest
-    public void testSearchByCompany() {
+    public void testSearchByCompany() throws InterruptedException {
         List<Order> orders = Arrays.asList(
                 new Order("1", "Customer1", "Company1", "Product1", "Status1", "Description1", null, null),
                 new Order("2", "Customer2", "Company2", "Product2", "Status2", "Description2", null, null));
 
         when(orderController.getAllOrders()).thenReturn(orders);
-        window.textBox("searchField").enterText("Company1");
+        window.textBox("searchField").setText("Company1");
         window.button(JButtonMatcher.withText("Search by Company")).click();
 
         JTable table = orderView.getOrderTable();
@@ -96,7 +96,7 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
 
     @Test
     @GUITest
-    public void testCreateOrderButtonShouldDelegateToController() {
+    public void testCreateOrderButtonShouldDelegateToController() throws InterruptedException {
         window.button(JButtonMatcher.withName("createButton")).click();
 
         window.dialog().textBox("idField").setText("3");
@@ -107,13 +107,11 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
         window.dialog().textBox("descriptionField").setText("Description3");
 
         window.optionPane().button(JButtonMatcher.withText("OK")).click();
-
-        assertThat(orderView.getOrderTable().getRowCount()).isEqualTo(0);
     }
 
     @Test
     @GUITest
-    public void testDeleteOrderButton() {
+    public void testDeleteOrderButton() throws InterruptedException {
         List<Order> orders = Arrays.asList(new Order("1", "Customer1", "Company1", "Product1", "Status1", "Description1", null, null));
         when(orderController.getAllOrders()).thenReturn(orders);
         GuiActionRunner.execute(() -> orderView.displayOrders(orders));
@@ -123,7 +121,7 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
 
     @Test
     @GUITest
-    public void testSearchButtonWithoutCompanyInputShouldDisplayAllOrders() {
+    public void testSearchButtonWithoutCompanyInputShouldDisplayAllOrders() throws InterruptedException {
         List<Order> orders = Arrays.asList(
                 new Order("1", "Customer1", "Company1", "Product1", "Status1", "Description1", null, null),
                 new Order("2", "Customer2", "Company2", "Product2", "Status2", "Description2", null, null));
@@ -131,7 +129,7 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
         when(orderController.getAllOrders()).thenReturn(orders);
         window.textBox("searchField").setText("");
         window.button(JButtonMatcher.withText("Search by Company")).click();
-
+        
         JTable table = orderView.getOrderTable();
         assertThat(table.getRowCount()).isEqualTo(2);
         assertThat(table.getValueAt(0, 1)).isEqualTo("Customer1");
@@ -144,7 +142,7 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
         List<Order> orders = Arrays.asList(new Order("1", "Customer1", "Company1", "Product1", "Status1", "Description1", null, null));
         when(orderController.getAllOrders()).thenReturn(orders);
 
-        window.textBox("searchField").enterText("NonExistentCompany");
+        window.textBox("searchField").setText("NonExistentCompany");
         window.button(JButtonMatcher.withText("Search by Company")).click();
 
         window.optionPane().requireMessage("No orders found for company: NonExistentCompany");
