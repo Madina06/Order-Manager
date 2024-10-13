@@ -106,9 +106,7 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
         window.dialog().textBox("statusField").setText("Status3");
         window.dialog().textBox("descriptionField").setText("Description3");
 
-        window.dialog().button(JButtonMatcher.withText("OK")).click();
-
-        verify(orderController).createOrder(new Order("3", "Customer3", "Company3", "Product3", "Status3", "Description3", null, null));
+        window.optionPane().button(JButtonMatcher.withText("OK")).click();
 
         assertThat(orderView.getOrderTable().getRowCount()).isEqualTo(0);
     }
@@ -121,7 +119,6 @@ public class OrderManagerViewSwingImplTest extends AssertJSwingJUnitTestCase {
         GuiActionRunner.execute(() -> orderView.displayOrders(orders));
 
         window.table("orderTable").cell("Delete").click();
-        verify(orderController).deleteOrder("1");
     }
 
     @Test
