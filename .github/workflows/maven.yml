@@ -14,7 +14,10 @@ jobs:
              - java: 8
                maven-args: "-DrepoToken=$COVERALLS_REPO_TOKEN coveralls:report"
              - java: 11
-               maven-args: "sonar:sonar -Dsonar.projectKey=madinakuldeeva_Order-Manager"
+               maven-args: "-DrepoToken=$COVERALLS_REPO_TOKEN coveralls:report"
+             - java: 17
+               maven-args: "sonar:sonar -Dsonar.projectKey=madinakuldeeva_Order-Manager -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN"
+    
     
     name: Build with Java ${{ matrix.java }}
     steps:
