@@ -8,6 +8,7 @@ import com.mongodb.client.model.Filters;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
+import main.com.order_manager.main.OrderAppBDD;
 
 public class MongoSteps {
 
@@ -25,7 +26,7 @@ public class MongoSteps {
 
     @Before
     public void setUp() {
-        mongoClient = new MongoClient("localhost", 27017);
+        mongoClient = new MongoClient("localhost", OrderAppBDD.mongoPort);
         mongoClient.getDatabase(DB_NAME).drop();
     }
 

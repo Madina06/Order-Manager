@@ -22,7 +22,21 @@
 		<mongo.java.server.version>1.39.0</mongo.java.server.version>
 		<testcontainers.version>1.18.1</testcontainers.version>
 		<picocli.version>4.6.1</picocli.version>
-		<cucumber.version>7.3.2</cucumber.version>
+		<cucumber.version>5.5.0</cucumber.version>
+
+		<sonar.issue.ignore.multicriteria>e11,e12,e13</sonar.issue.ignore.multicriteria>
+		<sonar.issue.ignore.multicriteria.e11.ruleKey>
+			java:S110
+		</sonar.issue.ignore.multicriteria.e11.ruleKey>
+		<sonar.issue.ignore.multicriteria.e11.resourceKey>
+			**/*.java
+		</sonar.issue.ignore.multicriteria.e11.resourceKey>
+		<sonar.issue.ignore.multicriteria.e12.ruleKey>
+			java:S117
+		</sonar.issue.ignore.multicriteria.e12.ruleKey>
+		<sonar.issue.ignore.multicriteria.e13.ruleKey>
+			java:S2699
+		</sonar.issue.ignore.multicriteria.e13.ruleKey>
 
 		<sonar.organization>madinakuldeeva</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -246,7 +260,7 @@
 			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.45.1</version>
+				<version>0.42.1</version>
 				<configuration>
 					<images>
 						<image>
@@ -264,7 +278,6 @@
 						<id>docker-start</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>build</goal>
 							<goal>start</goal>
 						</goals>
 					</execution>

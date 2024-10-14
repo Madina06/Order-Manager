@@ -19,6 +19,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import main.com.order_manager.main.OrderAppBDD;
 
 public class OrderSteps {
 
@@ -33,7 +34,7 @@ public class OrderSteps {
 
 	@When("The Order View is shown")
 	public void the_Order_View_is_shown() {
-		application("com.order_manager.main.App").withArgs("--mongo-port=27017", "--db-name=" + MongoSteps.DB_NAME,
+		application("com.order_manager.main.App").withArgs("--mongo-port=" + OrderAppBDD.mongoPort, "--db-name=" + MongoSteps.DB_NAME,
 				"--db-collection=" + MongoSteps.COLLECTION_NAME).start();
 		window = WindowFinder.findFrame(new GenericTypeMatcher<JFrame>(JFrame.class) {
 			@Override
