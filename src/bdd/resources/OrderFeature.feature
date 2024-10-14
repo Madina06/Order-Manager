@@ -10,11 +10,11 @@ Feature: Order Management
   Scenario: Searching for an existing order
     When The Order View is shown
     Given The user provides a company name in the search field, specifying an existing name
-    When The user clicks the "Search by Company" button
+    When The user clicks the "Search" button
     Then The search results should contain the searched order
 
   Scenario: Searching for a non-existing order
     When The Order View is shown
     Given The user provides a company name in the search field, specifying a non-existing name
-    When The user clicks the "Search by Company" button
+    When The user clicks the "Search" button
     Then The displayed orders should match the orders in the database
